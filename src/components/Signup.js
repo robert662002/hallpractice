@@ -5,8 +5,7 @@ import '../index.css'
 
 const Signup = () => {
   return (
-    <>  
-              
+    <>                
         <div className='md:mt-[-100px] grid h-[50%] w-full grid-cols-1 md:grid-cols-2'>
             <div className='max-h-full hidden md:block'>
                 <img className='w-full h-screen object-contain' src={Hall} alt='/'/>
