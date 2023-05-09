@@ -12,8 +12,8 @@
     },
     {
       "id": 3,
-      "name": "Medium Conference Room",
-      "capacity": 50
+      "name": "Medium  Room",
+      "capacity": 59
     },
     {
       "id": 5,
@@ -31,14 +31,9 @@
       "capacity": 1000
     },
     {
-      "id": 8,
-      "name": "new hall 1",
-      "capacity": 34
-    },
-    {
       "id": 9,
-      "name": "vishveshwaraya hall",
-      "capacity": 400
+      "name": "shri vishveshwaraya hall",
+      "capacity": 410
     }
   ]
 }

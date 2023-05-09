@@ -8,16 +8,19 @@ import HallCheckForm from "./components/HallCheckForm";
 import AdminHome from "./components/AdminHome";
 import AddUser from "./components/AddUser";
 import AddHall from "./components/AddHall";
-import ViewHall from "./components/ViewHall/ViewHall"
+import ViewHall from "./components/ViewHall/ViewHall";
+import EditHall from "./components/EditHall";
+import { Route,Routes, useNavigate } from "react-router-dom";
 import { useState } from "react";
 function App() {
 
   const[halls,setHalls]=useState([])
-  return (
-    <div className="App">
-        <AddHall halls={halls} setHalls={setHalls}/>
-        <ViewHall halls={halls} setHalls={setHalls}/>
-    </div>
+  return (    
+    <Routes>
+      <Route path="/" element={<ViewHall halls={halls} setHalls={setHalls} />}></Route>
+      <Route path="/edit/:id" element={<EditHall halls={halls} setHalls={setHalls} />}></Route>
+    </Routes>
+
   );
 }
 
