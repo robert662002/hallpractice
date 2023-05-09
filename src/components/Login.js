@@ -14,13 +14,14 @@ const Login = () => {
                     <h2 className='text-4xl font-bold text-center py-6'>LOG IN :)</h2>
                     <div className='flex flex-col py-2'>
                         <label>Email</label>
-                        <input type='text' className='border py-2' />
+                        <input type='text' className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm' />
                     </div>
                     <div className='flex flex-col py-2'>
                         <label>Password</label>
-                        <input type='password' className='border py-2' />    
+                        <input type='password' className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm' />    
                     </div>
-                    <button className='text-black border w-full my-5 py-2 bg-[#00df9a] '>Sign In</button>
+                    <div className='flex flex-col items-center justify-center'>
+                    <button className='text-black border w-[75%] my-5 py-2 bg-[#00df9a] '>Sign In</button></div>
                     <div className='text-center'> 
                         <p>Create an account</p>
                     </div>            

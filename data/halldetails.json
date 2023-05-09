@@ -1,0 +1,44 @@
+{
+  "hall": [
+    {
+      "id": 1,
+      "name": "Grand Ballroom",
+      "capacity": 500
+    },
+    {
+      "id": 2,
+      "name": "Small Conference Room",
+      "capacity": 20
+    },
+    {
+      "id": 3,
+      "name": "Medium Conference Room",
+      "capacity": 50
+    },
+    {
+      "id": 5,
+      "name": "Boardroom",
+      "capacity": 12
+    },
+    {
+      "id": 6,
+      "name": "Classroom",
+      "capacity": 30
+    },
+    {
+      "id": 7,
+      "name": "Exhibition Hall",
+      "capacity": 1000
+    },
+    {
+      "id": 8,
+      "name": "new hall 1",
+      "capacity": 34
+    },
+    {
+      "id": 9,
+      "name": "vishveshwaraya hall",
+      "capacity": 400
+    }
+  ]
+}

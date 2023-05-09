@@ -8,17 +8,15 @@ import HallCheckForm from "./components/HallCheckForm";
 import AdminHome from "./components/AdminHome";
 import AddUser from "./components/AddUser";
 import AddHall from "./components/AddHall";
+import ViewHall from "./components/ViewHall/ViewHall"
+import { useState } from "react";
 function App() {
+
+  const[halls,setHalls]=useState([])
   return (
     <div className="App">
-        <Navbar/>
-        <AddUser/>
-        <Login/>
-        <Hero/>
-        <AdminHome/>
-        <AddHall/>
-        <HallCheckForm/>
-        <Signup/>
+        <AddHall halls={halls} setHalls={setHalls}/>
+        <ViewHall halls={halls} setHalls={setHalls}/>
     </div>
   );
 }

@@ -11,20 +11,23 @@ const HallCheckForm = () => {
                     <h2 className='text-4xl font-bold text-center py-6'>Hall Filter</h2>
                     <div>
                         <label>date</label>
-                        <input type='date'/>
+                        <input  className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm ' type='date'/>
                     </div>
                     <div>
                         <label>time</label>
-                        <input type='time'/>
+                        <input  className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm ' type='time'/>
                     </div>
                     <div>
                         <label>seats expected</label>
-                        <input type='text'/>    
+                        <input  className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm ' type='text'/>    
                     </div>
-                    <div>
-                        <label>air condition</label>
-                        <input type='checkbox'/>    
-                    </div>        
+                
+  <div className="mt-2">
+    <label className="inline-flex items-center">
+      <input type="checkbox" className="w-7 h-7 rounded-xl border-0"  />
+      <span className="ml-2">air condition</span>
+    </label>
+  </div>        
                 </form>     
             </div>      
             <div className='max-h-full h-screen w-full text-white flex flex-col items-center md:justify-center'>
