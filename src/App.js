@@ -17,10 +17,10 @@ function App() {
   const[halls,setHalls]=useState([])
   return (    
     <Routes>
-      <Route path="/" element={<ViewHall halls={halls} setHalls={setHalls} />}></Route>
+      <Route path="/" element={ <ViewHall halls={halls} setHalls={setHalls} />}></Route>
       <Route path="/edit/:id" element={<EditHall halls={halls} setHalls={setHalls} />}></Route>
+      <Route path="/addhall" element={<AddHall halls={halls} setHalls={setHalls} />}></Route>
     </Routes>
-
   );
 }
 
