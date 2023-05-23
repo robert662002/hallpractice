@@ -1,11 +1,14 @@
 import React from 'react'
 import hall from '../api/halls'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const AddHall = ({halls,setHalls}) => {
 
     const[newHallName,setNewHallName]=useState('');
     const[newHallCapacity,setNewHallCapacity]=useState('');
+    const navigate = useNavigate();
+
     const handleSubmit = async(e) => {
         e.preventDefault();
         const id = halls.length ? halls[halls.length-1].id+1 : 1;
@@ -16,6 +19,7 @@ const AddHall = ({halls,setHalls}) => {
             setHalls(allHalls);
             setNewHallCapacity('');
             setNewHallName('');
+            navigate('/');
         }
         catch(err){
             console.log(`Error: $(err.message)`);

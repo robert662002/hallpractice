@@ -26,14 +26,39 @@
       "capacity": 30
     },
     {
-      "id": 7,
-      "name": "Exhibition Hall",
-      "capacity": 1000
-    },
-    {
       "id": 9,
       "name": "shri vishveshwaraya hall",
       "capacity": 410
+    },
+    {
+      "id": 10,
+      "name": "albert einstein hall",
+      "capacity": 345
+    },
+    {
+      "id": 11,
+      "name": "kkkk",
+      "capacity": 67
+    },
+    {
+      "id": 12,
+      "name": "ashna convention center",
+      "capacity": 1000
+    },
+    {
+      "id": 14,
+      "name": "hhhhhhhhhhhhh",
+      "capacity": null
+    },
+    {
+      "id": 15,
+      "name": "sudihi krishna",
+      "capacity": 788
+    },
+    {
+      "id": 16,
+      "name": "jjjjjjjjjjjjjjjjjj",
+      "capacity": 12
     }
   ]
 }

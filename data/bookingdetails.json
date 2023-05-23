@@ -1,0 +1,23 @@
+{
+    "bookings": [
+      {
+        "id": 1,
+        "description": "Conference Room Booking",
+        "date": "2023-04-25",
+        "venue": "Meeting Room 1"
+      },
+      {
+        "id": 2,
+        "description": "Hotel Reservation",
+        "date": "2023-06-10",
+        "venue": "Grand Hotel"
+      },
+      {
+        "id": 3,
+        "description": "Event Ticket Purchase",
+        "date": "2023-07-05",
+        "venue": "Stadium Arena"
+      }
+    ]
+  }
+  
