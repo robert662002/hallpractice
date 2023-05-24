@@ -1,45 +1,50 @@
-import React, { useEffect, useState } from 'react'
-import bookingsapi from '../../api/bookings'
-import ViewBookings from './ViewBookings'
-import Navbar from '../Navbar'
+import React, { useEffect, useState } from 'react';
+import bookingsapi from '../../api/bookings';
+import ViewBookings from './ViewBookings';
+import Navbar from '../Navbar';
+import { BeatLoader } from 'react-spinners';
 
 const Home = () => {
-    const [bookings, setBookings] = useState([])
+    const [bookings, setBookings] = useState([]);
+    const [loading, setLoading] = useState(true); // New state variable for loading
+
     useEffect(() => {
-        const fetchPosts = async () => {
+        const fetchBookings = async () => {
             try {
                 const response = await bookingsapi.get('/home');
                 const currentDate = new Date().toISOString().split('T')[0];
                 const filteredBookings = response.data.filter(booking => booking.date >= currentDate);
                 setBookings(filteredBookings);
-            }
-            catch (error) {
+            } catch (error) {
                 if (error.response) {
                     console.log(error.response.data);
                     console.log(error.response.status);
                     console.log(error.response.headers);
-                }
-                else {
+                } else {
                     console.log(`Error: ${error.message}`);
                 }
+            } finally {
+                setLoading(false); // Set loading to false regardless of success or error
             }
-        }
-        fetchPosts();
-    }, [])
+        };
+
+        fetchBookings();
+    }, []);
+
     return (
         <>
             <Navbar />
-            <div className='text-white'>
-                {bookings.length ? (
+            <div className="flex items-center text-white justify-center h-screen">
+                {loading ? (
+                    <BeatLoader color="#ffffff" loading={true} size={15} />
+                ) : bookings.length ? (
                     <ViewBookings bookings={bookings} />
                 ) : (
-                    <p style={{ marginTop: "2rem" }}>
-                        No posts to display.
-                    </p>
+                    <p style={{ marginTop: '2rem' }}>No posts to display.</p>
                 )}
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;
