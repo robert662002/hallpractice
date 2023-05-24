@@ -8,7 +8,7 @@ const Home = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await bookingsapi.get('/bookings');
+                const response = await bookingsapi.get('/home');
                 const currentDate = new Date().toISOString().split('T')[0];
                 const filteredBookings = response.data.filter(booking => booking.date >= currentDate);
                 setBookings(filteredBookings);

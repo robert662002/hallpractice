@@ -29,8 +29,14 @@ function App() {
       <Route path="/hallcheck" element={<HallCheckForm halls={halls} setHalls={setHalls} />}></Route>
       <Route path="/unauth" element={<Unauthorized halls={halls} setHalls={setHalls} />}></Route>
       <Route path="/home" element={<Home />}></Route>
+      <Route path="/login" element={<Login />}></Route>
     </Routes>
   );
 }
 
 export default App;
+
+
+
+
+///////jddddddddddddddddd
