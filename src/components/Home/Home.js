@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import bookingsapi from '../../api/bookings';
 import ViewBookings from './ViewBookings';
 import Navbar from '../Navbar';
-import { BeatLoader } from 'react-spinners';
+import { BarLoader } from 'react-spinners';
 
 const Home = () => {
     const [bookings, setBookings] = useState([]);
@@ -36,7 +36,7 @@ const Home = () => {
             <Navbar />
             <div className="flex items-center text-white justify-center h-screen">
                 {loading ? (
-                    <BeatLoader color="#ffffff" loading={true} size={15} />
+                    <BarLoader color="#ffffff" loading={true} size={15} />
                 ) : bookings.length ? (
                     <ViewBookings bookings={bookings} />
                 ) : (

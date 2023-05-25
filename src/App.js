@@ -12,31 +12,26 @@ import ViewHall from "./components/ViewHall/ViewHall";
 import EditHall from "./components/EditHall";
 import UserHome from "./components/UserHome";
 import Unauthorized from "./components/Unauthorized";
-import { Route,Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./components/Home/Home";
+import Booking from "./components/Booking";
 import { useState } from "react";
+import Layout from "./components/Layout";
 function App() {
 
-  const[halls,setHalls]=useState([])
-  return (    
+  const [halls, setHalls] = useState([])
+  return (
     <Routes>
-      <Route path="/" element={ <ViewHall halls={halls} setHalls={setHalls} />}></Route>
-      <Route path="/edit/:id" element={<EditHall halls={halls} setHalls={setHalls} />}></Route>
-      <Route path="/addhall" element={<AddHall halls={halls} setHalls={setHalls} />}></Route>
-      <Route path="/signup" element={<AddHall halls={halls} setHalls={setHalls} />}></Route>
-      <Route path="/Adminhome" element={<AdminHome halls={halls} setHalls={setHalls} />}></Route>
-      <Route path="/Userhome" element={<UserHome halls={halls} setHalls={setHalls} />}></Route>
-      <Route path="/hallcheck" element={<HallCheckForm halls={halls} setHalls={setHalls} />}></Route>
-      <Route path="/unauth" element={<Unauthorized halls={halls} setHalls={setHalls} />}></Route>
-      <Route path="/home" element={<Home />}></Route>
-      <Route path="/login" element={<Login />}></Route>
+      <Route path="/" element={<Layout />}>
+        <Route path="filter">
+          <Route index element={<HallCheckForm />} />
+          <Route path="booking/:id" element={<Booking />} />
+        </Route>
+        <Route path="home" element={<Home />} />
+      </Route>
     </Routes>
   );
 }
 
 export default App;
 
-
-
-
-///////jddddddddddddddddd

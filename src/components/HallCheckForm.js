@@ -1,41 +1,136 @@
-import React from 'react'
-import Hall from '../assets/halls.jpg'
-import Navbar from './Navbar'
+import React, { useState } from 'react';
+import backendapi from '.././api/backend'
+import Hall from '../assets/halls.jpg';
+import Navbar from './Navbar';
+import ViewMain from './ViewAvailableHalls/ViewMain';
 
 const HallCheckForm = () => {
-  return (
-    <>                
-       <div className='md:mt-[-100px] grid h-[50%] w-full grid-cols-1 md:grid-cols-2 gap-5'>
-            <div className='bg-[#000300] flex flex-col justify-center'>
-                <form className='max-w-[400px] w-full mx-auto  p-4 border border-white rounded-sm text-white'>
-                    <h2 className='text-4xl font-bold text-center py-6'>Hall Filter</h2>
-                    <div>
-                        <label>date</label>
-                        <input  className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm ' type='date'/>
-                    </div>
-                    <div>
-                        <label>time</label>
-                        <input  className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm ' type='time'/>
-                    </div>
-                    <div>
-                        <label>seats expected</label>
-                        <input  className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm ' type='text'/>    
-                    </div>
-                
-  <div className="mt-2">
-    <label className="inline-flex items-center">
-      <input type="checkbox" className="w-7 h-7 rounded-xl border-0"  />
-      <span className="ml-2">air condition</span>
-    </label>
-  </div>        
-                </form>     
-            </div>      
-            <div className='max-h-full h-screen w-full text-white flex flex-col items-center md:justify-center'>
-                <h1>Available Hall</h1>
-            </div>
-        </div>
-        </>  
-  )
-}
+  // Initialize state for form inputs
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
+  const [date, setDate] = useState('');
+  const [minCapacity, setMinCapacity] = useState('');
+  const [ac, setAc] = useState(false);
+  const [projector, setProjector] = useState(false);
+  const [availableHalls, setAvailableHalls] = useState([])
+  const [formInfo, setFormInfo] = useState({})
+  // Function to handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-export default HallCheckForm
+    // Create an object with form data
+    const formData = {
+      startTime,
+      endTime,
+      date,
+      minCapacity:parseInt(minCapacity),
+      ac: ac.toString(),
+      projector: projector.toString()
+    };
+
+    setFormInfo(formData)
+
+    try {
+      // Send the form data to an API using axios
+      const response = await backendapi.post('filter', formData);
+      setAvailableHalls(response.data)
+      console.log(response.data)
+      console.log(availableHalls)
+      // Handle the API response if needed
+      console.log(response.data);
+
+      // Reset the form to its initial values
+      // resetForm();
+    } catch (error) {
+      // Handle errors if the API request fails
+      console.error(error);
+    }
+  };
+
+  // Function to reset the form to its initial values
+  /* const resetForm = () => {
+    setStartTime('');
+    setEndTime('');
+    setDate('');
+    setMinCapacity('');
+    setAc(false);
+    setProjector(false);
+  }; */
+
+  return (
+    <>
+      <Navbar />
+      <div className='md:mt-[-35px] grid w-full grid-cols-1 md:grid-cols-2 gap-5'>
+        <div className='bg-[#000300] flex flex-col justify-center'>
+          <form className='max-w-[400px] w-full mx-auto  p-4 border border-white rounded-sm text-white' onSubmit={handleSubmit}>
+            <h2 className='text-4xl font-bold text-center py-6'>Hall Filter</h2>
+            <div>
+              <label>date</label>
+              <input
+                className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm'
+                type='date' value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>starttime</label>
+              <input
+                className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm'
+                type='time'
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>endtime</label>
+              <input
+                className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm'
+                type='time'
+                value={endTime}
+                onChange={(e) => setEndTime(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>seats expected</label>
+              <input
+                className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm'
+                type='text'
+                value={minCapacity}
+                onChange={(e) => setMinCapacity(e.target.value)}
+              />
+            </div>
+            <div className="mt-2">
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  className="w-7 h-7 rounded-xl border-0"
+                  checked={ac}
+                  onChange={(e) => setAc(e.target.checked)}
+                />
+                <span className="ml-2">air condition</span>
+              </label>
+            </div>
+            <div className="mt-2">
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  className="w-7 h-7 rounded-xl border-0"
+                  checked={projector}
+                  onChange={(e) => setProjector(e.target.checked)}
+                />
+                <span className="ml-2">projector</span>
+              </label>
+            </div>
+            <button
+              type="submit">Submit</button>
+          </form>
+        </div>
+        <div className='max-h-full h-screen w-full text-white flex flex-col items-center md:justify-center'>
+          <ViewMain availableHalls={availableHalls} formInfo={formInfo} />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default HallCheckForm;
