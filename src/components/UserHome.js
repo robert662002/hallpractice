@@ -5,6 +5,7 @@ import { GiTheater } from "react-icons/gi";
 import EditProfileIcon from '../icons/EditProfileIcon'
 import HallBookingCancellationIcon from '../icons/HallBookingCancellationIcon'
 import HallBookingIcon from '../icons/HallBookingIcon'
+import { Link } from 'react-router-dom';
 
 const UserHome = () => {
    return (
@@ -16,7 +17,7 @@ const UserHome = () => {
                <GiTheater size={64} />
                <div className='text-center font-medium'>
                   <ul>
-                     <li className='p-4  bg-[#00df9a] text-black  font-semibold my-3 rounded-2xl hover:bg-white' >Book here</li>
+                     <li className='p-4  bg-[#00df9a] text-black  font-semibold my-3 rounded-2xl hover:bg-white' ><Link to="filter" >Book here</Link></li>
                   </ul>
                </div>
             </div>
@@ -25,7 +26,7 @@ const UserHome = () => {
                <HallBookingCancellationIcon />
                <div className='text-center font-medium'>
                   <ul>
-                     <li className='p-4  bg-[#00df9a] text-black  font-semibold my-3 rounded-2xl hover:bg-white' >Cancel here</li>
+                     <li className='p-4  bg-[#00df9a] text-black  font-semibold my-3 rounded-2xl hover:bg-white' ><Link to="cancel" >Cancel here</Link></li>
                   </ul>
                </div>
             </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import bookingsapi from '../../api/bookings';
-import ViewBookings from './ViewBookings';
+import ViewBookingsFeed from './ViewBookingsFeed';
 import Navbar from '../Navbar';
 import { BarLoader } from 'react-spinners';
 
@@ -38,7 +38,7 @@ const Home = () => {
                 {loading ? (
                     <BarLoader color="#ffffff" loading={true} size={15} />
                 ) : bookings.length ? (
-                    <ViewBookings bookings={bookings} />
+                    <ViewBookingsFeed bookings={bookings} />
                 ) : (
                     <p style={{ marginTop: '2rem' }}>No posts to display.</p>
                 )}

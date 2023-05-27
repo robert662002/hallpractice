@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import backendapi from '.././api/backend'
-import Hall from '../assets/halls.jpg';
 import Navbar from './Navbar';
 import ViewMain from './ViewAvailableHalls/ViewMain';
+import useAuth from '../hooks/useAuth';
 
 const HallCheckForm = () => {
   // Initialize state for form inputs
@@ -13,7 +13,9 @@ const HallCheckForm = () => {
   const [ac, setAc] = useState(false);
   const [projector, setProjector] = useState(false);
   const [availableHalls, setAvailableHalls] = useState([])
-  const [formInfo, setFormInfo] = useState({})
+
+  const{formInfo,setFormInfo}=useAuth();
+  
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,16 +31,12 @@ const HallCheckForm = () => {
     };
 
     setFormInfo(formData)
+    console.log(formInfo)
 
     try {
       // Send the form data to an API using axios
       const response = await backendapi.post('filter', formData);
       setAvailableHalls(response.data)
-      console.log(response.data)
-      console.log(availableHalls)
-      // Handle the API response if needed
-      console.log(response.data);
-
       // Reset the form to its initial values
       // resetForm();
     } catch (error) {
@@ -70,6 +68,7 @@ const HallCheckForm = () => {
                 className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm'
                 type='date' value={date}
                 onChange={(e) => setDate(e.target.value)}
+                required
               />
             </div>
             <div>
@@ -79,6 +78,7 @@ const HallCheckForm = () => {
                 type='time'
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
+                required
               />
             </div>
             <div>
@@ -88,6 +88,7 @@ const HallCheckForm = () => {
                 type='time'
                 value={endTime}
                 onChange={(e) => setEndTime(e.target.value)}
+                required
               />
             </div>
             <div>
@@ -97,6 +98,7 @@ const HallCheckForm = () => {
                 type='text'
                 value={minCapacity}
                 onChange={(e) => setMinCapacity(e.target.value)}
+                required
               />
             </div>
             <div className="mt-2">
@@ -126,7 +128,7 @@ const HallCheckForm = () => {
           </form>
         </div>
         <div className='max-h-full h-screen w-full text-white flex flex-col items-center md:justify-center'>
-          <ViewMain availableHalls={availableHalls} formInfo={formInfo} />
+          <ViewMain availableHalls={availableHalls} />
         </div>
       </div>
     </>

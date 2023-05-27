@@ -14,20 +14,26 @@ import UserHome from "./components/UserHome";
 import Unauthorized from "./components/Unauthorized";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./components/Home/Home";
-import Booking from "./components/Booking";
 import { useState } from "react";
 import Layout from "./components/Layout";
+import BookSubmit from "./components/BookSubmit";
+import Cancelbook from "./components/Cancelbook";
 function App() {
 
   const [halls, setHalls] = useState([])
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="filter">
-          <Route index element={<HallCheckForm />} />
-          <Route path="booking/:id" element={<Booking />} />
+        <Route path="/" element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="userHome">
+          <Route index element={<UserHome />} />
+          <Route path="cancel" element={<Cancelbook />} />
+          <Route path="filter">
+            <Route index element={<HallCheckForm />} />
+            <Route path="booking/:id" element={<BookSubmit />} />
+          </Route>
         </Route>
-        <Route path="home" element={<Home />} />
       </Route>
     </Routes>
   );

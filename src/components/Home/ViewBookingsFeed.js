@@ -1,7 +1,7 @@
 import React from 'react'
 import ViewBookingPost from './ViewBookingPost'
 
-const ViewBookings = ({ bookings }) => {
+const ViewBookingsFeed = ({ bookings }) => {
     return (
         <div className='flex flex-col items-center md:justify-center h-screen sm:mx-2'>
             <h1 className='text-4xl my-4'>BOOkings List</h1>
@@ -16,4 +16,4 @@ const ViewBookings = ({ bookings }) => {
     )
 }
 
-export default ViewBookings
+export default ViewBookingsFeed
