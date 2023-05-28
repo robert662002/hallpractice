@@ -11,13 +11,19 @@ const Navbar = () => {
   const gotoLogin=()=>{
     navigate('/login')
   }
+  const goToSignUp = () =>{
+    navigate('/signup')
+  }
+  const goToHome = () =>{
+    navigate('/')
+  }
   return (
 
     <div className=' top-0 flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white'>
         <h1 className='w-full md:text-3xl text-2xl font-bold text-[#00df9a]'>MITS HALLS.</h1>
         <ul className='flex '>
-            <li className='p-4'>Home</li>
-            <li className='p-4'>SignUp</li>
+            <li className='p-4' onClick={goToHome}><button>Home</button></li>
+            <li className='p-4'onClick={goToSignUp}><button>SignUp</button></li>
             {/* <li className='p-4'><Link to="login"> SignIn</Link></li> */}
             <li className='p-4' onClick={gotoLogin}><button>SignIn</button></li>
             <li className='p-4'>About</li>
