@@ -18,6 +18,11 @@ import { useState } from "react";
 import Layout from "./components/Layout";
 import BookSubmit from "./components/BookSubmit";
 import Cancelbook from "./components/Cancelbook";
+import RequireAuth from "./components/RequireAuth";
+const ROLES = {
+  'User': 2001,
+  'Admin': 5150,
+}
 function App() {
 
   const [halls, setHalls] = useState([])
@@ -25,16 +30,27 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
-        <Route path="userHome">
-          <Route index element={<UserHome />} />
-          <Route path="cancel" element={<Cancelbook />} />
-          <Route path="filter">
-            <Route index element={<HallCheckForm />} />
-            <Route path="booking/:id" element={<BookSubmit />} />
+
+        <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+          <Route path="userHome">
+            <Route index element={<UserHome />} />
+            <Route path="cancel" element={<Cancelbook />} />
+            <Route path="filter">
+              <Route index element={<HallCheckForm />} />
+              <Route path="booking/:id" element={<BookSubmit />} />
+            </Route>
           </Route>
         </Route>
+
+        <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+          <Route path='adminHome'>
+            <Route index element={<AdminHome />} />
+          </Route>
+        </Route>
+
       </Route>
     </Routes>
   );

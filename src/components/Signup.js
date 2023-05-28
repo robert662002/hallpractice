@@ -110,8 +110,6 @@ const Signup = () => {
     const [showPwd, setShowPwd] = useState(false);
     const [showMatchPwd, setShowMatchPwd] = useState(false);
 
-
-
     return (
         <>
             <Navbar />
