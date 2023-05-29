@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import backendapi from '.././api/backend'
 import Navbar from './Navbar';
 import ViewMain from './ViewAvailableHalls/ViewMain';
 import useAuth from '../hooks/useAuth';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const HallCheckForm = () => {
   // Initialize state for form inputs
@@ -14,10 +15,16 @@ const HallCheckForm = () => {
   const [projector, setProjector] = useState(false);
   const [availableHalls, setAvailableHalls] = useState([])
 
-  const{formInfo,setFormInfo}=useAuth();
-  
+  const { formInfo, setFormInfo } = useAuth();
+
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   // Function to handle form submission
   const handleSubmit = async (e) => {
+    let isMounted = true;
+    const controller = new AbortController();
     e.preventDefault();
 
     // Create an object with form data
@@ -25,7 +32,7 @@ const HallCheckForm = () => {
       startTime,
       endTime,
       date,
-      minCapacity:parseInt(minCapacity),
+      minCapacity: parseInt(minCapacity),
       ac: ac.toString(),
       projector: projector.toString()
     };
@@ -35,13 +42,18 @@ const HallCheckForm = () => {
 
     try {
       // Send the form data to an API using axios
-      const response = await backendapi.post('filter', formData);
-      setAvailableHalls(response.data)
+      const response = await axiosPrivate.post('filter', formData, { signal: controller.signal });
+      isMounted && setAvailableHalls(response.data)
       // Reset the form to its initial values
       // resetForm();
     } catch (error) {
       // Handle errors if the API request fails
       console.error(error);
+      navigate('/login', { state: { from: location }, replace: true });
+    }
+    return () => {
+      isMounted = false;
+      controller.abort();
     }
   };
 

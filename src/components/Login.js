@@ -9,7 +9,7 @@ const LOGIN_URL = '/auth';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { auth, setAuth, persist, setPersist } = useAuth();
+  const { auth, setAuth } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
