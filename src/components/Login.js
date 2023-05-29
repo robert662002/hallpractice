@@ -73,7 +73,6 @@ const Login = () => {
   };
   return (
     <>
-      <Navbar />
       <div className='md:mt-[100px] grid h-[50%] w-full grid-cols-1 mt-[50px]'>
         {/* <div className='max-h-full hidden md:block'>
                     <img className="h-screen" src={Hall} alt='/' />

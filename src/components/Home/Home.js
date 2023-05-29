@@ -33,8 +33,7 @@ const Home = () => {
 
     return (
         <>
-            <Navbar />
-            <div className="flex items-center text-white justify-center h-screen">
+            <div className="text-white flex justify-center w-screen">
                 {loading ? (
                     <BarLoader color="#ffffff" loading={true} size={15} />
                 ) : bookings.length ? (

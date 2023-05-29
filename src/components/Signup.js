@@ -112,7 +112,6 @@ const Signup = () => {
 
     return (
         <>
-            <Navbar />
 
             <div className=' grid h-[50%] w-full grid-cols-1 md:grid-cols-2'>
                 <div className='max-h-full hidden md:block'>

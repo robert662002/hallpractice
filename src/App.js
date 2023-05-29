@@ -40,7 +40,7 @@ function App() {
       <Route path="/" element={<Layout />}>
 
         <Route path="/" element={<Home />} />
-        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="unauthorized" element={<Unauthorized />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
 
@@ -62,7 +62,7 @@ function App() {
               <Route index element={<AdminHome />} />
             </Route>
           </Route>
-          
+
         </Route>
 
       </Route>

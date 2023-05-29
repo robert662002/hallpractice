@@ -54,7 +54,7 @@ const BookSubmit = () => {
         }
     }
     return (
-        <div className='h-screen flex flex-col items-center justify-center text-white '>
+        <div className='mt-[-100px] h-screen flex flex-col items-center justify-center text-white '>
             <h1 className='text-3xl my-5'>Booking Details</h1>
             <form className='p-10 flex flex-col border border-1 rounded-2xl' onSubmit={handleSubmit}>
                 <div className='flex'>

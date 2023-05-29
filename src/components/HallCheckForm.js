@@ -69,7 +69,6 @@ const HallCheckForm = () => {
 
   return (
     <>
-      <Navbar />
       <div className='md:mt-[-35px] grid w-full grid-cols-1 md:grid-cols-2 gap-5'>
         <div className='bg-[#000300] flex flex-col justify-center'>
           <form className='max-w-[400px] w-full mx-auto  p-4 border border-white rounded-sm text-white' onSubmit={handleSubmit}>

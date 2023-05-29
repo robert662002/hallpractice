@@ -8,7 +8,7 @@ const ViewMain = ({ availableHalls }) => {
                 <ViewMainFeed availableHalls={availableHalls}/>
             ) : (
                 <p style={{ marginTop: "2rem" }}>
-                    No posts to display.
+                    No available halls. Please change Form data
                 </p>
             )}
         </div>
