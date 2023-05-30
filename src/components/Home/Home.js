@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import bookingsapi from '../../api/bookings';
 import ViewBookingsFeed from './ViewBookingsFeed';
-import Navbar from '../Navbar';
 import { BarLoader } from 'react-spinners';
 
 const Home = () => {

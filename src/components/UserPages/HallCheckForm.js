@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import Navbar from './Navbar';
 import ViewMain from './ViewAvailableHalls/ViewMain';
-import useAuth from '../hooks/useAuth';
-import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import useAuth from '../../hooks/useAuth';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const HallCheckForm = () => {
+
+  const currentDate = new Date().toISOString().split('T')[0];
+
   // Initialize state for form inputs
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
@@ -44,8 +46,6 @@ const HallCheckForm = () => {
       // Send the form data to an API using axios
       const response = await axiosPrivate.post('filter', formData, { signal: controller.signal });
       isMounted && setAvailableHalls(response.data)
-      // Reset the form to its initial values
-      // resetForm();
     } catch (error) {
       // Handle errors if the API request fails
       console.error(error);
@@ -57,21 +57,11 @@ const HallCheckForm = () => {
     }
   };
 
-  // Function to reset the form to its initial values
-  /* const resetForm = () => {
-    setStartTime('');
-    setEndTime('');
-    setDate('');
-    setMinCapacity('');
-    setAc(false);
-    setProjector(false);
-  }; */
-
   return (
     <>
-      <div className='md:mt-[-35px] grid w-full grid-cols-1 md:grid-cols-2 gap-5'>
+      <div className=' grid w-full grid-cols-1 md:grid-cols-2 gap-5'>
         <div className='bg-[#000300] flex flex-col justify-center'>
-          <form className='max-w-[400px] w-full mx-auto  p-4 border border-white rounded-sm text-white' onSubmit={handleSubmit}>
+          <form className='mt-[4rem] md:mt-[-6rem] max-w-[400px] w-full mx-auto  p-4  border-white rounded-xl border-4 text-white' onSubmit={handleSubmit}>
             <h2 className='text-4xl font-bold text-center py-6'>Hall Filter</h2>
             <div>
               <label>date</label>
@@ -79,6 +69,7 @@ const HallCheckForm = () => {
                 className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm'
                 type='date' value={date}
                 onChange={(e) => setDate(e.target.value)}
+                min={currentDate}
                 required
               />
             </div>
@@ -134,8 +125,9 @@ const HallCheckForm = () => {
                 <span className="ml-2">projector</span>
               </label>
             </div>
-            <button
-              type="submit">Submit</button>
+            <div className='flex justify-center my-2'>
+              <button className="bg-[#007BFF] px-6 py-2 rounded-xl border border-1 hover:bg-white hover:text-black" type="submit">Submit</button>
+            </div>
           </form>
         </div>
         <div className='max-h-full h-screen w-full text-white flex flex-col items-center md:justify-center'>

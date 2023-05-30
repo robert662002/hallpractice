@@ -1,7 +1,7 @@
 import React from 'react'
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
+//import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import useLogout from '../hooks/useLogout'
 import useAuth from '../hooks/useAuth'
 const Navbar = () => {
@@ -41,9 +41,9 @@ const Navbar = () => {
         <li className='p-4' onClick={goToHome}><button>Home</button></li>
         {auth.accessToken ? (
           <>
-          <li className='p-4' onClick={signOut}><button>Logout</button></li>
           <li className='p-4' onClick={gotoUserHome}><button>UserHome</button></li>
           <li className='p-4' onClick={gotoAdminHome}><button>AdminHome</button></li>
+          <li className='p-4' onClick={signOut}><button>Logout</button></li>
         </>
         ) : (
           <>

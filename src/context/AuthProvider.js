@@ -8,7 +8,11 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{
-            auth, setAuth,formInfo,setFormInfo
+            auth, 
+            setAuth,
+            formInfo,
+            setFormInfo,
+            
         }}>
             {children}
         </AuthContext.Provider>
@@ -16,3 +20,8 @@ export const AuthProvider = ({ children }) => {
 }
 
 export default AuthContext;
+
+
+//auth will contain currently logged in persons email,accessToken,roles,
+
+//formInfo contains details from hallcheckform to use in booksubmit

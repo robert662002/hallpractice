@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import backendapi from '../api/backend';
-import Navbar from './Navbar'
+import backendapi from '../../api/backend';
+import Navbar from '../Navbar'
 import { useNavigate } from 'react-router-dom';
 const Cancelbook = () => {
   const [bookingId, setBookingId] = useState('');

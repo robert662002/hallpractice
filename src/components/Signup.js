@@ -19,9 +19,9 @@ const Signup = () => {
 
     const navigate = useNavigate();
 
-    const userRef = useRef();
-    const errRef = useRef();
-    const mailRef = useRef();
+    const userRef = useRef(null);
+    const errRef = useRef(null);
+    const mailRef = useRef(null);
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
@@ -119,13 +119,13 @@ const Signup = () => {
                 </div>
                 <div className='bg-[#000300] flex flex-col items-center justify-center'>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    {success ? (
-                        <section className='flex flex-col justify-center align center'>
-                            <h1 className='text-white text-3xl'>Success!</h1>
-                            <button className='bg-[#2b94d4] px-3 rounded-md' type='button' onClick={goToLogin}>go to Login</button>
-                        </section>
-                    ) : (
-                        <form className='max-w-[400px] w-full items-center justify-center mx-auto bg- p-4 border border-white rounded-sm text-white' onSubmit={handleSubmit}>
+                    <form className='mt-[6rem] md:mt-[-6rem] max-w-[400px] w-full items-center justify-center mx-auto bg- p-4 border border-white rounded-sm text-white' onSubmit={handleSubmit}>
+                        {success ? (
+                            <section className='flex flex-col justify-center  min-h-[40%] p-5 mt-[6rem]'>
+                                <h1 className='text-white text-3xl'>Success!</h1>
+                                <button className='bg-[#2b94d4] px-3 rounded-md my-4' type='button' onClick={goToLogin}>go to Login</button>
+                            </section>
+                        ) : (<>
                             <h2 className='text-3xl font-bold text-center py-6'>SIGN UP :)</h2>
                             <div className='flex flex-col py-2'>
                                 <label>Email
@@ -225,8 +225,9 @@ const Signup = () => {
                                 <p>Already Created ?</p>
                                 <button className='bg-[#2b94d4] px-3 rounded-md' type='button' onClick={goToLogin}>Login</button>
                             </div>
-                        </form>
-                )}
+                        </>
+                        )}
+                    </form>
                 </div>
             </div>
         </>

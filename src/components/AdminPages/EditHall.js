@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import hallapi from '../api/halls';
+import hallapi from '../../api/halls';
 import { useNavigate } from 'react-router-dom';
 
 const EditHall = ({halls,setHalls}) => {

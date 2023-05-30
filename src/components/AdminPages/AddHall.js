@@ -1,5 +1,5 @@
 import React from 'react'
-import hall from '../api/halls'
+import hall from '../../api/halls'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 

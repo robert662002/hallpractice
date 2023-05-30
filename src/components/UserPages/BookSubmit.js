@@ -1,8 +1,7 @@
 import React, { useEffect,useState } from 'react'
-import useAuth from '../hooks/useAuth'
+import useAuth from '../../hooks/useAuth'
 import { useNavigate, useParams } from 'react-router-dom';
-import backendapi from '../api/backend'
-import mongoose from 'mongoose';
+import backendapi from '../../api/backend'
 const BookSubmit = () => {
     const { formInfo, auth } = useAuth();
     const { id } = useParams();
@@ -80,6 +79,7 @@ const BookSubmit = () => {
                         value={eventDescription}
                         onChange={(e) => setEventDescription(e.target.value)}
                         maxLength={20}
+                        required
                     />
                     <p>Characters remaining: {20 - eventDescription.length}</p>
                 </div>

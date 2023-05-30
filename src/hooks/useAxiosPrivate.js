@@ -42,3 +42,7 @@ const useAxiosPrivate = () => {
 }
 
 export default useAxiosPrivate;
+
+
+
+// to add accesstoken in the bearer field

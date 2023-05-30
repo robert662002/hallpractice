@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Hall from '../assets/halls.jpg'
-import Navbar from './Navbar'
+/* import Hall from '../assets/halls.jpg'
+import Navbar from './Navbar' */
 import axios from '../api/backend'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -45,8 +45,9 @@ const Login = () => {
       //console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
+      const username= response?.data?.username;
 
-      setAuth({ userEmail, pwd, roles, accessToken });
+      setAuth({ userEmail, roles, accessToken,username });
       console.log(auth)
       setUserEmail('');
       setPwd('');
