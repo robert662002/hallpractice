@@ -2,12 +2,16 @@ import React, { useEffect,useState } from 'react'
 import useAuth from '../../hooks/useAuth'
 import { useNavigate, useParams } from 'react-router-dom';
 import backendapi from '../../api/backend'
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 const BookSubmit = () => {
     const { formInfo, auth } = useAuth();
     const { id } = useParams();
     const [hallDetails, setHallDetails] = useState(null);
     const [eventDescription, setEventDescription] = useState('');
     const navigate= useNavigate()
+    const axiosPrivate = useAxiosPrivate();
+
+    const [errMsg,setErrMsg] = useState('')
 
     useEffect(() => {
         // Fetch hall details using the provided ID
@@ -15,7 +19,7 @@ const BookSubmit = () => {
             try {
                 // Make an API call using Axios
                 /* const response = await backendapi.get(`/halls/${mongoose.Types.ObjectId(id)}`); */
-                const response = await backendapi.get(`/halls/${id}`);
+                const response = await axiosPrivate.get(`/halls/${id}`);
 
                 const data = response.data;
                 console.log(response.data)
@@ -29,7 +33,7 @@ const BookSubmit = () => {
         };
 
         fetchHallDetails();
-    }, [id]);
+    }, [id,axiosPrivate,hallDetails]);
 
     const handleSubmit = async(e) =>{
 
@@ -49,12 +53,17 @@ const BookSubmit = () => {
              
         }
         catch(err){
-            console.log(`Error: $(err.message)`);
+            if (!err?.response) {
+                setErrMsg('No Server Response go back');
+              } else if (err.response?.status === 400) {
+                setErrMsg('insuffiscient data go back')
+              } 
         }
     }
     return (
         <div className='mt-[-100px] h-screen flex flex-col items-center justify-center text-white '>
             <h1 className='text-3xl my-5'>Booking Details</h1>
+            <p>{errMsg}</p>
             <form className='p-10 flex flex-col border border-1 rounded-2xl' onSubmit={handleSubmit}>
                 <div className='flex'>
                 <h1 className='text-xl'>Hall name: {hallDetails ? hallDetails.hallname : null}</h1>

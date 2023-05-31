@@ -1,26 +1,22 @@
 import React from "react";
-import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
-import Hero from "./components/ForPractise/Hero";
-import Analysis from "./components/ForPractise/Analysis";
 import Login from "./components/Login";
 import HallCheckForm from "./components/UserPages/HallCheckForm";
 import AdminHome from "./components/AdminPages/AdminHome";
 import AddHall from "./components/AdminPages/AddHall";
 import EditHall from "./components/AdminPages/EditHall";
+import ViewHall from "./components/AdminPages/ViewHall";
 import UserHome from "./components/UserPages/UserHome";
 import Unauthorized from "./components/Unauthorized";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
-import { useState } from "react";
 import Layout from "./components/Layout";
 import BookSubmit from "./components/UserPages/BookSubmit";
 import Cancelbook from "./components/UserPages/Cancelbook";
 import RequireAuth from "./components/General/RequireAuth";
 import PersistLogin from "./components/General/PersistLogin";
 import UserBookings from "./components/UserPages/UserBookings";
-
-
+import ViewUser from "./components/AdminPages/ViewUser";
 
 
 const ROLES = {
@@ -28,11 +24,8 @@ const ROLES = {
   'Admin': 5150,
 }
 
-
-
 function App() {
 
-  const [halls, setHalls] = useState([])
   return (
     <Routes>
 
@@ -60,6 +53,12 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
             <Route path='adminHome'>
               <Route index element={<AdminHome />} />
+              <Route path="addHall" element={<AddHall />} />
+              <Route path="viewUser" element={<ViewUser />} />
+              <Route path="viewHall" >
+                <Route index element={<ViewHall />} />
+                <Route path="editHall/:id" element={<EditHall />} />
+              </Route>
             </Route>
           </Route>
 

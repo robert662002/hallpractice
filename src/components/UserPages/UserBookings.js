@@ -44,7 +44,7 @@ const UserBookings = () => {
                         <div className='flex justify-center'>
                             <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border p-4'>
                                 {bookings.map(booking => (
-                                    <div className="flex flex-col items-center border rounded-2xl hover:scale-105">
+                                    <div key={booking.id} className="flex flex-col items-center border rounded-2xl hover:scale-105">
                                     <h1 className="px-2 text-3xl font-bold text-center my-2">{booking.description}</h1>
                                     <h1 className="my-1 text-xl">{booking.hallname}</h1>
                                     <h1 className="my-1 text-xl">{booking.date}</h1>
