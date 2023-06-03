@@ -45,9 +45,9 @@ const Login = () => {
       //console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
-      const username= response?.data?.username;
+      const username = response?.data?.username;
 
-      setAuth({ userEmail, roles, accessToken,username });
+      setAuth({ userEmail, roles, accessToken, username });
       console.log(auth)
       setUserEmail('');
       setPwd('');
@@ -65,7 +65,7 @@ const Login = () => {
       errRef.current.focus();
     }
   }
-  const goToSignUp = () =>{
+  const goToSignUp = () => {
     navigate('/signup')
   }
 
@@ -74,13 +74,9 @@ const Login = () => {
   };
   return (
     <>
-      <div className='md:mt-[100px] grid h-[50%] w-full grid-cols-1 mt-[50px]'>
-        {/* <div className='max-h-full hidden md:block'>
-                    <img className="h-screen" src={Hall} alt='/' />
-                </div> */}
-        <div className='bg-[#000300] flex flex-col justify-center'>
-          <form className='max-w-[400px] w-full mx-auto  p-4 border border-white rounded-sm text-white' onSubmit={handleSubmit}>
-            <p ref={errRef} className={errMsg ? "text-[#962a2a]" : "hide"} aria-live="assertive">{errMsg}</p>
+        <div className=' flex flex-col h-screen mt-[-6rem] items-center justify-center shadow-6xl shadow-black'>
+          <form className='shadow-xl max-w-[400px] w-full items-center justify-center mx-auto bg-slate-200 p-4 border-8 border-[#eb4d5f] rounded-2xl' onSubmit={handleSubmit}>
+            <p ref={errRef} className={errMsg ? "px-2 text-center text-[#962a2a] bg-red-100" : "hide"} aria-live="assertive">{errMsg}</p>
             <h2 className='text-4xl font-bold text-center py-6'>LOG IN :)</h2>
             <div className='flex flex-col py-2'>
               <label>Email</label>
@@ -100,7 +96,7 @@ const Login = () => {
                 <input
                   type={showPassword ? 'text' : 'password'}
                   id="password"
-                  className="w-full py-2 px-4 mt-2 rounded-md text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full py-2 px-3 mt-2 rounded-md text-black border border-gray-300 "
                   onChange={(e) => setPwd(e.target.value)}
                   value={pwd}
                   required
@@ -114,14 +110,13 @@ const Login = () => {
               </div>
             </div>
             <div className='flex flex-col items-center justify-center'>
-              <button className='text-black border w-[75%] my-5 py-2 bg-[#00df9a] '>Sign In</button></div>
+              <button className='bg-[#eb4d5f] my-2  text-white rounded-lg p-3 px-8 border-4 hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]'>Log In</button></div>
             <div className='flex items-center justify-center gap-2'>
               <p>New User ?</p>
-              <button className='bg-[#2b94d4] px-3 rounded-md' type='button' onClick={goToSignUp}>SignUp</button>
+              <button className='hover:bg-[#eb4d5f] my-2  hover:text-white py-1 px-2 border-2 bg-white text-[#eb4d5f] border-[#eb4d5f]' type='button' onClick={goToSignUp}>SignUp</button>
             </div>
           </form>
         </div>
-      </div>
     </>
   )
 }

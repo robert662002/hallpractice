@@ -32,9 +32,11 @@ const Home = () => {
 
     return (
         <>
-            <div className="text-white flex justify-center w-screen">
+            <div className="text-black flex mt-[4rem] justify-center ">
                 {loading ? (
-                    <BarLoader color="#ffffff" loading={true} size={15} />
+                    <div className='h-screen mt-[-6rem] flex justify-center items-center'>
+                        <BarLoader color="#000000" loading={true} size={15} />
+                    </div>
                 ) : bookings.length ? (
                     <ViewBookingsFeed bookings={bookings} />
                 ) : (

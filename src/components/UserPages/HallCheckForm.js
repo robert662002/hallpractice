@@ -59,9 +59,9 @@ const HallCheckForm = () => {
 
   return (
     <>
-      <div className=' grid w-full grid-cols-1 md:grid-cols-2 gap-5'>
-        <div className='bg-[#000300] flex flex-col justify-center'>
-          <form className='mt-[4rem] md:mt-[-6rem] max-w-[400px] w-full mx-auto  p-4  border-white rounded-xl border-4 text-white' onSubmit={handleSubmit}>
+      <div className='mt-[5rem] grid w-full grid-cols-1 md:grid-cols-2 gap-4 px-1'>
+        <div className=''>
+          <form className='bg-slate-200 shadow-xl max-w-[400px] w-full mx-auto  p-4 border-8 border-[#eb4d5f] rounded-xl  text-black' onSubmit={handleSubmit}>
             <h2 className='text-4xl font-bold text-center py-6'>Hall Filter</h2>
             <div>
               <label>date</label>
@@ -97,7 +97,7 @@ const HallCheckForm = () => {
               <label>seats expected</label>
               <input
                 className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm'
-                type='text'
+                type='number'
                 value={minCapacity}
                 onChange={(e) => setMinCapacity(e.target.value)}
                 required
@@ -126,11 +126,11 @@ const HallCheckForm = () => {
               </label>
             </div>
             <div className='flex justify-center my-2'>
-              <button className="bg-[#007BFF] px-6 py-2 rounded-xl border border-1 hover:bg-white hover:text-black" type="submit">Submit</button>
+              <button className="bg-[#eb4d5f] text-white px-6 py-2 rounded-xl border-4 hover:border-[#eb4d5f] hover:bg-white hover:text-[#eb4d5f]" type="submit">Submit</button>
             </div>
           </form>
         </div>
-        <div className='max-h-full h-screen w-full text-white flex flex-col items-center md:justify-center'>
+        <div className='max-h-full w-full flex flex-col items-center md:justify-center'>
           <ViewMain availableHalls={availableHalls} />
         </div>
       </div>

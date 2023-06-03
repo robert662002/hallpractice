@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useAuth from '../../hooks/useAuth'
 import { useNavigate, useParams } from 'react-router-dom';
 import backendapi from '../../api/backend'
@@ -8,10 +8,10 @@ const BookSubmit = () => {
     const { id } = useParams();
     const [hallDetails, setHallDetails] = useState(null);
     const [eventDescription, setEventDescription] = useState('');
-    const navigate= useNavigate()
+    const navigate = useNavigate()
     const axiosPrivate = useAxiosPrivate();
 
-    const [errMsg,setErrMsg] = useState('')
+    const [errMsg, setErrMsg] = useState('')
 
     useEffect(() => {
         // Fetch hall details using the provided ID
@@ -33,67 +33,67 @@ const BookSubmit = () => {
         };
 
         fetchHallDetails();
-    }, [id,axiosPrivate,hallDetails]);
+    }, [id, axiosPrivate]);
 
-    const handleSubmit = async(e) =>{
+    const handleSubmit = async (e) => {
 
         e.preventDefault()
 
         const bookInfo = {
-            email:auth.userEmail,
-            hallid:hallDetails._id,
+            email: auth.userEmail,
+            hallid: hallDetails._id,
             description: eventDescription,
-            date : formInfo.date,
-            starttime : formInfo.startTime,
-            endtime : formInfo.endTime
+            date: formInfo.date,
+            starttime: formInfo.startTime,
+            endtime: formInfo.endTime
         }
-        try{
-             await backendapi.post('/bookings',bookInfo)
-             navigate('/userHome')
-             
+        try {
+            await backendapi.post('/bookings', bookInfo)
+            navigate('/userHome')
+
         }
-        catch(err){
+        catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response go back');
-              } else if (err.response?.status === 400) {
+            } else if (err.response?.status === 400) {
                 setErrMsg('insuffiscient data go back')
-              } 
+            }
         }
     }
     return (
-        <div className='mt-[-100px] h-screen flex flex-col items-center justify-center text-white '>
-            <h1 className='text-3xl my-5'>Booking Details</h1>
-            <p>{errMsg}</p>
-            <form className='p-10 flex flex-col border border-1 rounded-2xl' onSubmit={handleSubmit}>
-                <div className='flex'>
-                <h1 className='text-xl'>Hall name: {hallDetails ? hallDetails.hallname : null}</h1>
+        <div className='mt-[-100px] h-screen flex flex-col items-center justify-center text-black '>
+            <p className='bg-red-100 font-semibold text-red-600'>{errMsg}</p>
+            <form className='bg-white p-4 shadow-xl flex flex-col border border-1 rounded-2xl' onSubmit={handleSubmit}>
+                <h1 className='text-3xl text-center my-4'>Booking Details</h1>
+                <div className='flex my-1'>
+                    <h1 className='text-xl'>Hall name: {hallDetails ? hallDetails.hallname : null}</h1>
                 </div>
-                <div className='flex'>
+                <div className='flex my-1'>
                     <h1 className='text-xl'>Booked email: {auth.userEmail}</h1>
                 </div>
-                <div className='flex'>
+                <div className='flex my-1'>
                     <h1 className='text-xl'>Date: {formInfo.date}</h1>
                 </div>
-                <div className='flex'>
+                <div className='flex my-1'>
                     <h1 className='text-xl'>Start time: {formInfo.startTime}</h1>
                 </div>
-                <div className='flex'>
+                <div className='flex my-1'>
                     <h1 className='text-xl'>End time: {formInfo.endTime}</h1>
                 </div>
-                <div className='flex flex-col'>
+                <div className='flex my-1 flex-col gap-1'>
                     <label className='text-xl'>Event Description</label>
                     <textarea
-                        className='text-black px-2 border border-1 rounded-xl'
+                        className='text-black p-2 border border-1 rounded-xl'
                         id='event-description'
                         value={eventDescription}
                         onChange={(e) => setEventDescription(e.target.value)}
                         maxLength={20}
                         required
                     />
-                    <p>Characters remaining: {20 - eventDescription.length}</p>
+                    <p className='text-red-600'>Characters remaining: {20 - eventDescription.length}</p>
                 </div>
-                <div className='flex justify-center my-5'>
-                    <button className='bg-red-600 px-4 rounded-lg hover:bg-white hover:text-black hover:scale-105'>confirm booking</button>
+                <div className='flex justify-center my-3'>
+                    <button className='bg-[#eb4d5f] text-white hover:font-semibold border-4 border-white p-3 rounded-xl hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]'>confirm booking</button>
                 </div>
             </form>
         </div>

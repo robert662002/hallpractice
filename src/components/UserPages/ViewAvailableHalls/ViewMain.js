@@ -3,7 +3,7 @@ import ViewMainFeed from './ViewMainFeed'
 
 const ViewMain = ({ availableHalls }) => {
     return (
-        <div className='text-white'>
+        <div className='text-black'>
             {availableHalls.length ? (
                 <ViewMainFeed availableHalls={availableHalls}/>
             ) : (

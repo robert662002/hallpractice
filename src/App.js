@@ -17,6 +17,7 @@ import RequireAuth from "./components/General/RequireAuth";
 import PersistLogin from "./components/General/PersistLogin";
 import UserBookings from "./components/UserPages/UserBookings";
 import ViewUser from "./components/AdminPages/ViewUser";
+import ViewBooking from "./components/AdminPages/ViewBooking";
 
 
 const ROLES = {
@@ -55,6 +56,7 @@ function App() {
               <Route index element={<AdminHome />} />
               <Route path="addHall" element={<AddHall />} />
               <Route path="viewUser" element={<ViewUser />} />
+              <Route path="viewBooking" element={<ViewBooking />} />
               <Route path="viewHall" >
                 <Route index element={<ViewHall />} />
                 <Route path="editHall/:id" element={<EditHall />} />
