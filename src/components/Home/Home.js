@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import bookingsapi from '../../api/bookings';
+import bookingsapi from '../../api/axios';
 import ViewBookingsFeed from './ViewBookingsFeed';
 import { BarLoader } from 'react-spinners';
 
@@ -31,7 +31,6 @@ const Home = () => {
     }, []);
 
     return (
-        <>
             <div className="text-black flex mt-[4rem] justify-center ">
                 {loading ? (
                     <div className='h-screen mt-[-6rem] flex justify-center items-center'>
@@ -43,7 +42,6 @@ const Home = () => {
                     <p style={{ marginTop: '2rem' }}>No posts to display.</p>
                 )}
             </div>
-        </>
     );
 };
 

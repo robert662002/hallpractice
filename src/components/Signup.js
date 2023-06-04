@@ -4,7 +4,7 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Hall from '../assets/halls.jpg'
-import axios from '../api/backend'
+import axios from '../api/axios'
 import Navbar from './Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 //import axios from '../api/axios'
