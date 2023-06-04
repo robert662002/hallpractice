@@ -1,21 +1,13 @@
 import React from 'react'
 //import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useLogout from '../hooks/useLogout'
 import useAuth from '../hooks/useAuth'
-import Hero from './ForPractise/Hero'
 const Navbar = () => {
   const navigate = useNavigate()
   const logout = useLogout();
-  const { auth } = useAuth();
-
-  const [nav, setNav] = useState(true)
-
-  const handleNav = () => {
-    setNav(!nav)
-  }
-  const gotoLogin = () => {
+  const { auth } = useAuth();//to access usestate auth in the authcontext
+ const gotoLogin = () => {
     navigate('/login')
   }
   const goToSignUp = () => {
@@ -53,19 +45,6 @@ const Navbar = () => {
             </>
           )}
         </ul>
-        {/* <div onClick={handleNav} className='block md:hidden'>
-            {!nav ? <AiOutlineClose size={20}/> : <AiOutlineMenu size={20}/> }
-        </div>
-        <div className={!nav?' fixed left-0 top-0 w-[50%] h-[20%] border-r border-r-gray-900 bg-[#000300] ease-in-out duration-500 md:hidden':'fixed top-[-100%]'}>
-          <h1 className='w-full text-3xl font-bold text-[#00df9a] m-4 mt-7' >MITS HALLS.</h1>
-          <ul className='p-4 uppercase bg-[#000300] w-screen fixed'>
-              <li className='p-4 border-b border-gray-600'>Home</li>
-              <li className='p-4 border-b border-gray-600'>SignUp</li>
-              <li className='p-4 border-b border-gray-600'><Link to="login"> SignIn</Link></li>
-              <li className='p-4 border-b border-gray-600'>About</li>
-              <li className='p-4'>Contact</li>
-          </ul>
-        </div> */}
       </div>
     </>
   )

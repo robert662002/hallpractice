@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import backend from '../../api/backend';
+import backend from '../../api/axios';
 import { BarLoader } from 'react-spinners';
 import useAuth from '../../hooks/useAuth';
 
