@@ -16,7 +16,7 @@ const HallCheckForm = () => {
   const [ac, setAc] = useState(false);
   const [projector, setProjector] = useState(false);
   const [availableHalls, setAvailableHalls] = useState([])
-
+  const [errMsg, setErrMsg] = useState('')
   const { formInfo, setFormInfo } = useAuth();
 
   const axiosPrivate = useAxiosPrivate();
@@ -49,7 +49,10 @@ const HallCheckForm = () => {
     } catch (error) {
       // Handle errors if the API request fails
       console.error(error);
-      navigate('/login', { state: { from: location }, replace: true });
+      //navigate('/login', { state: { from: location }, replace: true });
+      if (!error?.response) {
+        setErrMsg('no response from backend')
+      }
     }
     return () => {
       isMounted = false;
@@ -62,6 +65,7 @@ const HallCheckForm = () => {
       <div className='mt-[5rem] grid w-full grid-cols-1 md:grid-cols-2 gap-4 px-1'>
         <div className=''>
           <form className='bg-slate-200 shadow-xl max-w-[400px] w-full mx-auto  p-4 border-8 border-[#eb4d5f] rounded-xl  text-black' onSubmit={handleSubmit}>
+            <p className='bg-red-200 text-red-500'>{errMsg}</p>
             <h2 className='text-4xl font-bold text-center py-6'>Hall Filter</h2>
             <div>
               <label>date</label>

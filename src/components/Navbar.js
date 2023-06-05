@@ -35,7 +35,7 @@ const Navbar = () => {
           {auth.accessToken ? (
             <>
               <li className='py-4 px-3   ' onClick={gotoUserHome}><button className=' hover:scale-110  px-2 '>User</button></li>
-              <li className='py-4 px-3   ' onClick={gotoAdminHome}><button className=' hover:scale-110  px-2 '>Admin</button></li>
+              {auth.roles.includes(5150) && <li className='py-4 px-3   ' onClick={gotoAdminHome}><button className=' hover:scale-110  px-2 '>Admin</button></li>}
               <li className='py-4 px-3   ' onClick={signOut}><button className=' hover:scale-110  px-2 '>Logout</button></li>
             </>
           ) : (
