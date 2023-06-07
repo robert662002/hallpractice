@@ -46,12 +46,18 @@ const HallCheckForm = () => {
       // Send the form data to an API using axios
       const response = await axiosPrivate.post('filter', formData, { signal: controller.signal });
       isMounted && setAvailableHalls(response.data)
+      setErrMsg("")
     } catch (error) {
       // Handle errors if the API request fails
       console.error(error);
       //navigate('/login', { state: { from: location }, replace: true });
       if (!error?.response) {
         setErrMsg('no response from backend')
+        setAvailableHalls([])
+      }
+      else{
+        setErrMsg('an error occured')
+        setAvailableHalls([])
       }
     }
     return () => {
@@ -65,13 +71,14 @@ const HallCheckForm = () => {
       <div className='mt-[5rem] grid w-full grid-cols-1 md:grid-cols-2 gap-4 px-1'>
         <div className=''>
           <form className='bg-slate-200 shadow-xl max-w-[400px] w-full mx-auto  p-4 border-8 border-[#eb4d5f] rounded-xl  text-black' onSubmit={handleSubmit}>
-            <p className='bg-red-200 text-red-500'>{errMsg}</p>
+            <p className='bg-red-600 text-red-200 font-semibold text-xl'>{errMsg}</p>
             <h2 className='text-4xl font-bold text-center py-6'>Hall Filter</h2>
             <div>
               <label>date</label>
               <input
                 className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm'
-                type='date' value={date}
+                type='date' 
+                value={date}
                 onChange={(e) => setDate(e.target.value)}
                 min={currentDate}
                 required

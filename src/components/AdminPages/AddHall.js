@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 import { useNavigate } from 'react-router-dom'
+import { BarLoader } from 'react-spinners'
+
 
 const AddHall = ({ halls, setHalls }) => {
 
@@ -10,9 +12,10 @@ const AddHall = ({ halls, setHalls }) => {
     const [ac, setAc] = useState(false);
     const [projector, setProjector] = useState(false);
     const [success, setSuccess] = useState(false)
-
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const axiosPrivate = useAxiosPrivate();
+    const [errMsg, setErrMsg] = useState('')
 
     const goBack = () => {
         navigate(-1)
@@ -24,6 +27,7 @@ const AddHall = ({ halls, setHalls }) => {
         e.preventDefault();
 
         try {
+            setLoading(true)
             const response = await axiosPrivate.post('halls', {
                 hallname: newHallName,
                 capacity: parseInt(newHallCapacity),
@@ -43,6 +47,18 @@ const AddHall = ({ halls, setHalls }) => {
         } catch (error) {
             // Handle error if needed
             console.error(error);
+            if (!error?.response) {
+                setErrMsg('no response from backend')
+            }
+            else if (error.response?.status === 500) {
+                setErrMsg('an error occured')
+            }
+            else{
+                setErrMsg('an unexpected error occured')
+            }
+
+        } finally {
+            setLoading(false)
         }
         return () => {
             isMounted = false;
@@ -65,6 +81,7 @@ const AddHall = ({ halls, setHalls }) => {
                     ) :
                     (
                         <form className='w-[80%] md:w-[60%] lg:w-[40%]  border-8 shadow-xl rounded-2xl p-5 bg-slate-200 border-[#eb4d5f]' onSubmit={handleSubmit}>
+                            <p className={errMsg ? 'p-3 bg-red-600 text-red-200 ' : 'hide'}>{errMsg}</p>
                             <h1 className='text-3xl text-[#eb4d5f] text-center font-bold my-5'>Add hall</h1>
                             <h1 className='font-semibold text-xl '>details of new hall</h1>
                             <div className='flex flex-col my-2'>
@@ -81,7 +98,7 @@ const AddHall = ({ halls, setHalls }) => {
                                 <input
                                     className='text-black rounded-md p-2 border border-gray-300'
                                     type='number' value={newHallCapacity}
-                                    
+
                                     onChange={(e) => setNewHallCapacity(e.target.value)}
                                     required
                                 />
@@ -105,7 +122,13 @@ const AddHall = ({ halls, setHalls }) => {
                                 />
                             </div>
                             <div className='flex justify-center my-4'>
-                                <button className='bg-[#eb4d5f] text-white border-4 px-4 font-semibold py-2 rounded-xl hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]'>Add Hall</button>
+                                <button className={`bg-[#eb4d5f] my-2 text-white rounded-lg p-3 px-8 border-4 ${!loading ? 'hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]' : ''}`} disabled={loading}>
+                                    {loading ? (
+                                        <BarLoader color='#fff' height={4} width={100} />
+                                    ) : (
+                                        "Add Hall"
+                                    )}
+                                </button>
                             </div>
                         </form>
                     )

@@ -2,6 +2,8 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 import { useNavigate, useParams } from 'react-router-dom'
+import { BarLoader } from 'react-spinners'
+
 
 const EditHall = () => {
 
@@ -12,6 +14,9 @@ const EditHall = () => {
     const [ac, setAc] = useState(false);
     const [projector, setProjector] = useState(false);
     const [success, setSuccess] = useState(false)
+
+    const [loading, setLoading] = useState(false)
+    const [errMsg, setErrMsg] = useState('')
 
     const navigate = useNavigate();
     const axiosPrivate = useAxiosPrivate();
@@ -26,6 +31,7 @@ const EditHall = () => {
         e.preventDefault();
 
         try {
+            setLoading(true)
             const response = await axiosPrivate.put('halls', {
                 id,
                 hallname: editHallName,
@@ -46,6 +52,15 @@ const EditHall = () => {
         } catch (error) {
             // Handle error if needed
             console.error(error);
+            if (!error?.response) {
+                setErrMsg('no response from backend')
+            }
+            else if (error.response?.status === 500) {
+                setErrMsg('an error occured')
+            }
+
+        } finally {
+            setLoading(false)
         }
         return () => {
             isMounted = false;
@@ -63,9 +78,19 @@ const EditHall = () => {
                 setProjector(response.data.projector)
                 console.log(response.data)
             } catch (error) {
-                console.error('Error fetching hall details:', error);
+                // Handle error if needed
+                console.error(error);
+                if (!error?.response) {
+                    setErrMsg('no response from backend')
+                }
+                else if (error.response?.status === 500) {
+                    setErrMsg('an error occured')
+                }
+                else{
+                    setErrMsg('an unexpected error ocuured')
+                }
             }
-        };
+        }
         fetchHallDetails();
     }, [id, axiosPrivate]);
 
@@ -83,6 +108,7 @@ const EditHall = () => {
                     ) :
                     (
                         <form className='w-[80%] md:w-[60%] lg:w-[40%]  border-8 shadow-xl rounded-2xl p-5 bg-slate-200 border-[#eb4d5f]' onSubmit={handleSubmit}>
+                            <p className={errMsg ? 'p-3 bg-red-600 text-red-200 ' : 'hide'}>{errMsg}</p>
                             <h1 className='text-3xl text-[#eb4d5f] text-center font-bold my-5'>Edit hall</h1>
                             <h1 className='font-semibold text-2xl'>details of edit hall</h1>
                             <div className='flex flex-col my-2'>
@@ -123,7 +149,13 @@ const EditHall = () => {
                                 />
                             </div>
                             <div className='flex justify-center my-4'>
-                                <button className='bg-[#eb4d5f] text-white border-4 px-4 font-semibold py-2 rounded-xl hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]'>Confirm Edit</button>
+                                <button className={`bg-[#eb4d5f] my-2 text-white rounded-lg p-3 px-8 border-4 ${!loading ? 'hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]' : ''}`} disabled={loading}>
+                                    {loading ? (
+                                        <BarLoader color='#fff' height={4} width={100} />
+                                    ) : (
+                                        "Confirm Edit"
+                                    )}
+                                </button>
                             </div>
                         </form>
                     )

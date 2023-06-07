@@ -6,6 +6,8 @@ import useAuth from '../../hooks/useAuth';
 const UserBookings = () => {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [errMsg, setErrMsg] = useState('');
+
 
     const { auth } = useAuth();
 
@@ -18,12 +20,13 @@ const UserBookings = () => {
                 setBookings(response.data);
 
             } catch (error) {
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
+                if (!error?.response) {
+                    setErrMsg('no response from server');
+                }
+                else if (error.response?.status === 500) {
+                    setErrMsg("an error occured");
                 } else {
-                    console.log(`Error: ${error.message}`);
+                    setErrMsg("an error occured")
                 }
             } finally {
                 setLoading(false); // Set loading to false regardless of success or error
@@ -40,6 +43,8 @@ const UserBookings = () => {
                     <div className='flex justify-center items-center h-screen'>
                         <BarLoader color="#000000" loading={true} size={15} />
                     </div>
+                ) : errMsg ? (
+                    <p className='font-semibold mt-[2rem] text-xl'>{errMsg}</p>
                 ) : bookings.length ? (
                     <div className='w-screen flex flex-col items-center md:justify-center  sm:mx-2'>
                         <h1 className='text-4xl my-4'>Your Bookings</h1>
@@ -57,7 +62,7 @@ const UserBookings = () => {
                         </div>
                     </div>
                 ) : (
-                    <p style={{ marginTop: '2rem' }}>No bookings yet .</p>
+                    <p className='font-semibold mt-[2rem] text-xl' >No bookings yet .</p>
                 )}
             </div>
         </>

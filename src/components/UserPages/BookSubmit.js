@@ -3,14 +3,18 @@ import useAuth from '../../hooks/useAuth'
 import { useNavigate, useParams } from 'react-router-dom';
 import backendapi from '../../api/axios'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import { BarLoader } from 'react-spinners'
+
 const BookSubmit = () => {
+
+    
     const { formInfo, auth } = useAuth();
     const { id } = useParams();
     const [hallDetails, setHallDetails] = useState(null);
     const [eventDescription, setEventDescription] = useState('');
     const navigate = useNavigate()
     const axiosPrivate = useAxiosPrivate();
-
+    const [loading, setLoading] = useState(false);
     const [errMsg, setErrMsg] = useState('')
 
     useEffect(() => {
@@ -39,6 +43,7 @@ const BookSubmit = () => {
 
         e.preventDefault()
 
+
         const bookInfo = {
             email: auth.userEmail,
             hallid: hallDetails._id,
@@ -48,6 +53,7 @@ const BookSubmit = () => {
             endtime: formInfo.endTime
         }
         try {
+            setLoading(true)
             await backendapi.post('/bookings', bookInfo)
             navigate('/userHome')
 
@@ -58,11 +64,17 @@ const BookSubmit = () => {
             } else if (err.response?.status === 400) {
                 setErrMsg('insuffiscient data go back')
             }
+            else {
+                setErrMsg("an error occured")
+            }
+        }
+        finally {
+            setLoading(false); // Stop loading
         }
     }
     return (
         <div className='mt-[-100px] h-screen flex flex-col items-center justify-center text-black '>
-            <p className='bg-red-100 font-semibold text-red-600'>{errMsg}</p>
+            <p className='bg-red-600 font-semibold text-red-200'>{errMsg}</p>
             <form className='bg-white p-4 shadow-xl flex flex-col border border-1 rounded-2xl' onSubmit={handleSubmit}>
                 <h1 className='text-3xl text-center my-4'>Booking Details</h1>
                 <div className='flex my-1'>
@@ -93,7 +105,13 @@ const BookSubmit = () => {
                     <p className='text-red-600'>Characters remaining: {20 - eventDescription.length}</p>
                 </div>
                 <div className='flex justify-center my-3'>
-                    <button className='bg-[#eb4d5f] text-white hover:font-semibold border-4 border-white p-3 rounded-xl hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]'>confirm booking</button>
+                    <button className={`bg-[#eb4d5f] text-white hover:font-semibold border-4 border-white p-3 rounded-xl ${!loading ? 'hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]' : ''}`} disabled={loading}>
+                        {loading ? (
+                            <BarLoader color='#fff' height={4} width={100} />
+                        ) : (
+                            "Confirm Booking"
+                        )}
+                    </button>
                 </div>
             </form>
         </div>

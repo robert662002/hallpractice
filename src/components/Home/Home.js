@@ -5,7 +5,8 @@ import { BarLoader } from 'react-spinners';
 
 const Home = () => {
     const [bookings, setBookings] = useState([]);
-    const [loading, setLoading] = useState(true); // New state variable for loading
+    const [loading, setLoading] = useState(true);
+    const [errMsg, setErrMsg] = useState('');
 
     useEffect(() => {
         const fetchBookings = async () => {
@@ -15,15 +16,16 @@ const Home = () => {
                 const filteredBookings = response.data.filter(booking => booking.date >= currentDate);
                 setBookings(filteredBookings);
             } catch (error) {
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
+                if (!error?.response) {
+                    setErrMsg('no response from server');
+                }
+                else if(error.response?.status === 500){
+                    setErrMsg("an error occured");
                 } else {
                     console.log(`Error: ${error.message}`);
                 }
             } finally {
-                setLoading(false); // Set loading to false regardless of success or error
+                setLoading(false);
             }
         };
 
@@ -31,17 +33,19 @@ const Home = () => {
     }, []);
 
     return (
-            <div className="text-black flex mt-[4rem] justify-center ">
-                {loading ? (
-                    <div className='h-screen mt-[-6rem] flex justify-center items-center'>
-                        <BarLoader color="#000000" loading={true} size={15} />
-                    </div>
-                ) : bookings.length ? (
-                    <ViewBookingsFeed bookings={bookings} />
-                ) : (
-                    <p style={{ marginTop: '2rem' }}>No posts to display.</p>
-                )}
-            </div>
+        <div className="text-black flex mt-[2rem] justify-center ">
+            {loading ? (
+                <div className='h-screen mt-[-6rem] flex justify-center items-center'>
+                    <BarLoader color="#000000" loading={true} size={15} />
+                </div>
+            ) : errMsg ? (
+                <p className='font-semibold mt-[2rem] text-xl'>{errMsg}</p>
+            ) : bookings.length ? (
+                <ViewBookingsFeed bookings={bookings} />
+            ) : (
+                <p className='font-semibold mt-[2rem] text-xl'>No events .</p>
+            )}
+        </div>
     );
 };
 

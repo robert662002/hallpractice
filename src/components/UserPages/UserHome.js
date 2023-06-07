@@ -3,12 +3,10 @@ import { GiTheater } from "react-icons/gi";
 import EditProfileIcon from '../../icons/EditProfileIcon'
 import HallBookingCancellationIcon from '../../icons/HallBookingCancellationIcon'
 import { FaUser } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const UserHome = () => {
-
-   const navigate = useNavigate()
 
    const { auth } = useAuth();
 

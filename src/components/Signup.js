@@ -7,6 +7,8 @@ import Hall from '../assets/halls.jpg'
 import axios from '../api/axios'
 import Navbar from './Navbar';
 import { Link, useNavigate } from 'react-router-dom';
+import { BarLoader } from 'react-spinners'
+
 //import axios from '../api/axios'
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -18,6 +20,8 @@ const REGISTER_URL = '/register';
 const Signup = () => {
 
     const navigate = useNavigate();
+
+    const [loading, setLoading] = useState(false);
 
     const userRef = useRef(null);
     const errRef = useRef(null);
@@ -79,6 +83,7 @@ const Signup = () => {
             return;
         }
         try {
+            setLoading(true);
             const response = await axios.post(REGISTER_URL,
                 JSON.stringify({ mail, user, pwd }),
                 {
@@ -104,6 +109,8 @@ const Signup = () => {
                 setErrMsg('Registration Failed')
             }
             errRef.current.focus();
+        } finally {
+            setLoading(false); // Stop loading
         }
     }
 
@@ -114,9 +121,13 @@ const Signup = () => {
                 <form className='shadow-xl max-w-[400px] w-full items-center justify-center mx-auto bg-slate-200 p-4  rounded-2xl border-8 border-[#eb4d5f] ' onSubmit={handleSubmit} >
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     {success ? (
-                        <section className='flex flex-col justify-center  min-h-[40%] p-5 mt-[6rem]'>
-                            <h1 className='text-white text-3xl'>Success!</h1>
-                            <button className='bg-[#eb4d5f] px-3 rounded-md my-4' type='button' onClick={goToLogin}>go to Login</button>
+                        <section className='flex flex-col justify-center  min-h-[40%] p-5'>
+                            <h1 className='text-black text-3xl'>Account created succeslly!</h1>
+                            <div className='flex justify-center'>
+                                <button className='hover:bg-[#eb4d5f] my-2  hover:text-white py-1 px-2 border-2 bg-white text-[#eb4d5f] border-[#eb4d5f]' type='button' onClick={goToLogin}>
+                                    Log in
+                                </button>
+                            </div>
                         </section>
                     ) : (<>
                         <h2 className='text-3xl font-bold text-center py-6'>SIGN UP :)</h2>
@@ -213,10 +224,19 @@ const Signup = () => {
                             </p>
                         </div>
                         <div className='flex flex-col items-center justify-center'>
-                            <button disabled={!validName || !validPwd || !validMatch ? true : false} className='bg-[#eb4d5f] my-2  text-white rounded-lg p-3 px-8 border-4 hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]'>Sign Up</button></div>
+                            <button disabled={!validName || !validPwd || !validMatch || loading ? true : false} className={`bg-[#eb4d5f] my-2  text-white rounded-lg p-3 px-8 border-4 ${!loading ? 'hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]' : ''}`} >
+                                {loading ? (
+                                    <BarLoader color='#fff' loading={true} height={4} width={100} />
+                                ) : (
+                                    "Sign Up"
+                                )}
+                            </button>
+                        </div>
                         <div className='flex items-center justify-center gap-2'>
                             <p>Already Created ?</p>
-                            <button className='hover:bg-[#eb4d5f] my-2  hover:text-white py-1 px-2 border-2 bg-white text-[#eb4d5f] border-[#eb4d5f]' type='button' onClick={goToLogin}>Login</button>
+                            <button className='hover:bg-[#eb4d5f] my-2  hover:text-white py-1 px-2 border-2 bg-white text-[#eb4d5f] border-[#eb4d5f]' type='button' onClick={goToLogin}>
+                                Log in
+                            </button>
                         </div>
                     </>
                     )}
