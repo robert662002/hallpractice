@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ViewMain from './ViewAvailableHalls/ViewMain';
 import useAuth from '../../hooks/useAuth';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
-import { useLocation, useNavigate } from 'react-router-dom';
+//import { useLocation, useNavigate } from 'react-router-dom';
 
 const HallCheckForm = () => {
 
@@ -17,11 +17,13 @@ const HallCheckForm = () => {
   const [projector, setProjector] = useState(false);
   const [availableHalls, setAvailableHalls] = useState([])
   const [errMsg, setErrMsg] = useState('')
-  const { formInfo, setFormInfo } = useAuth();
+
+  const { formInfo, setFormInfo } = useAuth();// to collect details for displaying after submitting
 
   const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
-  const location = useLocation();
+  
+  /* const navigate = useNavigate();
+  const location = useLocation(); */
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
@@ -78,9 +80,9 @@ const HallCheckForm = () => {
               <input
                 className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm'
                 type='date' 
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                min={currentDate}
+                value={date}//reset 
+                onChange={(e) => setDate(e.target.value)}//date input een edkan
+                min={currentDate}//to enable booking from today
                 required
               />
             </div>
@@ -141,7 +143,7 @@ const HallCheckForm = () => {
             </div>
           </form>
         </div>
-        <div className='max-h-full w-full flex flex-col items-center md:justify-center'>
+        <div className='max-h-full w-full flex flex-col items-center'>
           <ViewMain availableHalls={availableHalls} />
         </div>
       </div>

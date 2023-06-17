@@ -3,7 +3,7 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 import { AiFillCalendar } from 'react-icons/ai';
 import { MdAccessTime } from 'react-icons/md';
 
-const ViewBookingPost = ({ booking }) => {
+const HomeBookingPost = ({ booking }) => {
     return (
         <div className="flex flex-col  rounded-2xl border-4 border-[#eb4d5f]  shadow-xl hover:scale-y-105">
             <h1 className="text-3xl text-center font-bold my-2">{booking.description}</h1>
@@ -24,4 +24,4 @@ const ViewBookingPost = ({ booking }) => {
         </div>
     )
 }
-export default ViewBookingPost
+export default HomeBookingPost

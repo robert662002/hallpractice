@@ -7,7 +7,7 @@ import { BarLoader } from 'react-spinners'
 
 const BookSubmit = () => {
 
-    
+
     const { formInfo, auth } = useAuth();
     const { id } = useParams();
     const [hallDetails, setHallDetails] = useState(null);
@@ -25,14 +25,21 @@ const BookSubmit = () => {
                 /* const response = await backendapi.get(`/halls/${mongoose.Types.ObjectId(id)}`); */
                 const response = await axiosPrivate.get(`/halls/${id}`);
 
-                const data = response.data;
-                console.log(response.data)
+                // const data = response.data;
+                // console.log(response.data)
 
                 // Update the hallDetails state with the fetched data
-                setHallDetails(data);
+                setHallDetails(response.data);
                 console.log(hallDetails)
-            } catch (error) {
-                console.error('Error fetching hall details:', error);
+            } catch (err) {
+                if (!err?.response) {
+                    setErrMsg('No Server Response go back');
+                } else if (err.response?.status === 400) {
+                    setErrMsg('insuffiscient data go back')
+                }
+                else {
+                    setErrMsg("an error occured")
+                }
             }
         };
 
@@ -63,6 +70,8 @@ const BookSubmit = () => {
                 setErrMsg('No Server Response go back');
             } else if (err.response?.status === 400) {
                 setErrMsg('insuffiscient data go back')
+            } else if (err.response?.status === 409) {
+                setErrMsg('Another booking already exists for the same time slot.')
             }
             else {
                 setErrMsg("an error occured")

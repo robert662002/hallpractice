@@ -11,6 +11,7 @@ const ViewBooking = () => {
 
     const [loading, setLoading] = useState(true); // New state variable for loading
     const axiosPrivate = useAxiosPrivate();
+    const [deleteLoading, setDeleteLoading] = useState(false)
     const navigate = useNavigate();
 
 
@@ -19,11 +20,15 @@ const ViewBooking = () => {
 
     const handleDelete = async (id) => {
         try {
+            setDeleteLoading(true)
             await axiosPrivate.delete('/bookings', { data: { id } });
             setBookings((prevBookings) => prevBookings.filter((booking) => booking._id !== id));
+
         }
         catch (err) {
             console.log(`Error:${err.message}`);
+        } finally {
+            setDeleteLoading(false);
         }
     }
     useEffect(() => {
@@ -62,21 +67,29 @@ const ViewBooking = () => {
                             {bookings.map(booking => (
                                 <div key={booking._id} className="shadow-xl flex flex-col bg-slate-200 border-4 border-[#eb4d5f] rounded-2xl hover:scale-105 m-2 p-2">
                                     <h1 className="text-3xl font-bold my-2 mx-2">{booking.description}</h1>
-                                    <h1 className="my-1 text-xl mx-2">booking email: {booking.email}</h1>
-                                    <h1 className="my-1 text-xl mx-2">booking id:{booking._id}</h1>
-                                    <h1 className="my-1 text-xl mx-2">booking hallid: {booking.hallid}</h1>
-                                    <h1 className="my-1 text-xl mx-2">booking date: {booking.date}</h1>
-                                    <h1 className="my-1 text-xl mx-2">booking starttime: {booking.starttime}</h1>
-                                    <h1 className="my-1 text-xl mx-2">booking endtime: {booking.endtime}</h1>
+                                    <h1 className="my-1 text-xl mx-2">email: {booking.email}</h1>
+                                    <h1 className="my-1 text-xl mx-2">id:{booking._id}</h1>
+                                    <h1 className="my-1 text-xl mx-2">hall: {booking.hallname}</h1>
+                                    <h1 className="my-1 text-xl mx-2">booked by: {booking.username}</h1>
+                                    <h1 className="my-1 text-xl mx-2">date: {booking.date}</h1>
+                                    <h1 className="my-1 text-xl mx-2">starttime: {booking.starttime}</h1>
+                                    <h1 className="my-1 text-xl mx-2">endtime: {booking.endtime}</h1>
                                     <div className='flex items-center gap-1'>
-                                        <button className="bg-[#eb4d5f] my-2  text-white rounded-lg p-3 border-4 hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]" onClick={() => handleDelete(booking._id)}>delete <FaTrash className="inline " size={24} /></button>
+                                        <button className={`bg-[#eb4d5f] my-2 text-white rounded-lg p-3 border-4 ${!deleteLoading ? 'hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]' : ''}`} disabled={deleteLoading} onClick={() => handleDelete(booking._id)} >
+                                            {
+                                                deleteLoading ? (
+                                                    <BarLoader color='#fff' height={4} width={100} />
+                                                ) : (
+                                                    <>delete<FaTrash className="inline " size={24} /></>
+                                            )}
+                                        </button>
                                     </div>
                                 </div>
                             ))}
 
                         </div>
                     </div>
-                </div>
+                </div >
             ) : (
                 <div className='flex justify-center items-center text-white text-center'>
                     <p style={{ marginTop: "2rem" }}>
