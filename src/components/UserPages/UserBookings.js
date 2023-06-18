@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react';
 import backend from '../../api/axios';
 import { BarLoader } from 'react-spinners';
 import useAuth from '../../hooks/useAuth';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+
 
 const UserBookings = () => {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [errMsg, setErrMsg] = useState('');
+    
+  const axiosPrivate = useAxiosPrivate();
+
 
 
     const { auth } = useAuth();
@@ -16,7 +21,7 @@ const UserBookings = () => {
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                const response = await backend.get(`/userBookings/${auth.userEmail}`);
+                const response = await axiosPrivate.get(`/userBookings/${auth.userEmail}`);
                 setBookings(response.data);
 
             } catch (error) {

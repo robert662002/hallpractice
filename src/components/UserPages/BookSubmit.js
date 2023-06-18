@@ -61,7 +61,7 @@ const BookSubmit = () => {
         }
         try {
             setLoading(true)
-            await backendapi.post('/bookings', bookInfo)
+            await axiosPrivate.post('/bookings', bookInfo)
             navigate('/userHome')
 
         }
