@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import ViewMain from './ViewAvailableHalls/ViewMain';
 import useAuth from '../../hooks/useAuth';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import { BarLoader } from 'react-spinners'
+
 //import { useLocation, useNavigate } from 'react-router-dom';
 
 const HallCheckForm = () => {
@@ -17,11 +19,12 @@ const HallCheckForm = () => {
   const [projector, setProjector] = useState(false);
   const [availableHalls, setAvailableHalls] = useState([])
   const [errMsg, setErrMsg] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const { formInfo, setFormInfo } = useAuth();// to collect details for displaying after submitting
 
   const axiosPrivate = useAxiosPrivate();
-  
+
   /* const navigate = useNavigate();
   const location = useLocation(); */
 
@@ -45,6 +48,7 @@ const HallCheckForm = () => {
     console.log(formInfo)
 
     try {
+      setLoading(true)
       // Send the form data to an API using axios
       const response = await axiosPrivate.post('filter', formData, { signal: controller.signal });
       isMounted && setAvailableHalls(response.data)
@@ -57,10 +61,12 @@ const HallCheckForm = () => {
         setErrMsg('no response from backend')
         setAvailableHalls([])
       }
-      else{
+      else {
         setErrMsg('an error occured')
         setAvailableHalls([])
       }
+    } finally {
+      setLoading(false)
     }
     return () => {
       isMounted = false;
@@ -79,7 +85,7 @@ const HallCheckForm = () => {
               <label>date</label>
               <input
                 className='text-black w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm'
-                type='date' 
+                type='date'
                 value={date}//reset 
                 onChange={(e) => setDate(e.target.value)}//date input een edkan
                 min={currentDate}//to enable booking from today
@@ -139,7 +145,13 @@ const HallCheckForm = () => {
               </label>
             </div>
             <div className='flex justify-center my-2'>
-              <button className="bg-[#eb4d5f] text-white px-6 py-2 rounded-xl border-4 hover:border-[#eb4d5f] hover:bg-white hover:text-[#eb4d5f]" type="submit">Submit</button>
+              <button className={`bg-[#eb4d5f] text-white hover:font-semibold border-4 p-3 rounded-xl ${!loading ? 'hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]' : ''}`} disabled={loading}>
+                {loading ? (
+                  <BarLoader color='#fff' height={4} width={100} />
+                ) : (
+                  "Filter"
+                )}
+              </button>
             </div>
           </form>
         </div>

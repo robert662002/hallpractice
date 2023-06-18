@@ -117,8 +117,8 @@ const Signup = () => {
 
     return (
         <>
-            <div className='flex flex-col h-screen mt-[-6rem] items-center justify-center' >
-                <form className='shadow-xl max-w-[400px] w-full items-center justify-center mx-auto bg-slate-200 p-4  rounded-2xl border-8 border-[#eb4d5f] ' onSubmit={handleSubmit} >
+            <div className='flex flex-col h-screen sm:mt-[-6rem] items-center sm:justify-center pt-8 sm:pt-0' >
+                <form className='shadow-xl sm:w-[400px] w-[350px] items-center justify-center bg-slate-200 p-4  rounded-2xl border-8 border-[#eb4d5f] ' onSubmit={handleSubmit} >
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     {success ? (
                         <section className='flex flex-col justify-center  min-h-[40%] p-5'>

@@ -82,7 +82,7 @@ const Login = () => {
   return (
     <>
       <div className='flex flex-col h-screen mt-[-6rem] items-center justify-center shadow-6xl shadow-black'>
-        <form className='shadow-xl max-w-[400px] w-full items-center justify-center mx-auto bg-slate-200 p-4 border-8 border-[#eb4d5f] rounded-2xl' onSubmit={handleSubmit}>
+        <form className='shadow-xl  sm:w-[400px] w-[350px] items-center justify-center mx-auto bg-slate-200 p-4 border-8 border-[#eb4d5f] rounded-2xl' onSubmit={handleSubmit}>
           <p ref={errRef} className={errMsg ? "p-2 text-center text-red-300 bg-red-800" : "hide"} aria-live="assertive">{errMsg}</p>
           <h2 className='text-4xl font-bold text-center py-6'>LOG IN :)</h2>
           <div className='flex flex-col py-2'>
