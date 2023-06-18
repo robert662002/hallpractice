@@ -4,9 +4,12 @@ const Layout = () => {
     return (
         <main className="App">
             <Navbar/>
-            <Outlet />
+            <Outlet />   
         </main>
     )
 }
 
 export default Layout
+
+
+//outlet represents the child of layout in App.js
