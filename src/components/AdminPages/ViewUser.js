@@ -47,7 +47,7 @@ const ViewUser = () => {
         <>
             {loading ? (
                 <div className='mt-[-6rem] flex h-screen justify-center items-center'>
-                    <BarLoader color="#00000" loading={true} size={15} />
+                    <BarLoader color="#000000" loading={true} size={15} />
                 </div>
             ) : users.length ? (
                 <div className='text-black flex flex-col items-center h-screen sm:mx-2'>
