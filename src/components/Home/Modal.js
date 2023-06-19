@@ -62,7 +62,7 @@ export default function Modal({ isOpen, closeModal, setIsOpen }) {
             <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white z-50 rounded-2xl p-4 ">
                 <div className='flex flex-col items-center justify-center text-black '>
                     <p className='bg-red-600 font-semibold text-red-200'>{errMsg}</p>
-                    <form className='bg-white p-4 shadow-xl flex flex-col border-4 border-[#eb4d5f] rounded-2xl md:min-w-[600px] min-w-[400px] ' onSubmit={handleSubmit}>
+                    <form className='bg-white p-4 shadow-xl flex flex-col border-4 border-[#eb4d5f] rounded-2xl md:min-w-[600px] min-w-[330px] ' onSubmit={handleSubmit}>
                         <h1 className='text-3xl my-4'>Enter your Feedback</h1>
                         <div className='flex my-1 flex-col'>
                             <textarea
@@ -70,10 +70,10 @@ export default function Modal({ isOpen, closeModal, setIsOpen }) {
                                 id='event-description'
                                 value={feedbackContent}
                                 onChange={(e) => setFeedbackContent(e.target.value)}
-                                maxLength={40}
+                                maxLength={50}
                                 required
                             />
-                            <p className='text-red-600'>Characters remaining: {40 - feedbackContent.length}</p>
+                            <p className='text-red-600'>Characters remaining: {50 - feedbackContent.length}</p>
                         </div>
                         <div className='flex justify-center my-3'>
                             <button className={`bg-[#eb4d5f] text-white hover:font-semibold border-4 border-white p-3 px-6 rounded-xl ${!loading ? 'hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]' : ''}`} disabled={loading}>

@@ -17,9 +17,9 @@ const HomeBookingFeed = ({ bookings }) => {
 
     return (
         <div className='w-screen flex flex-col  bg-slate-200'>
-            <div className='flex mx-3 justify-between'>
+            <div className='flex mx-3 justify-between items-center'>
                 <h1 className="px-4 text-5xl my-3 font-bold">Coming Events</h1>
-                <button onClick={openModal} className="bg-[#eb4d5f] text-white px-5 sm:px-3 text-xl rounded-3xl"><span className='hidden sm:inline mr-3'>Give Feedback</span><FaComment className='inline' size={24} /></button>
+                <button onClick={openModal} className="bg-[#eb4d5f] text-white p-5 sm:p-3 text-xl rounded-3xl"><span className='hidden sm:inline mr-3'>Give Feedback</span><FaComment className='inline' size={24} /></button>
             </div>
             <Modal isOpen={isOpen} closeModal={closeModal} setIsOpen={setIsOpen} />
             <div className='grid grid-cols-1 w-full gap-4 bg-slate-200  rounded-2xl p-4'>

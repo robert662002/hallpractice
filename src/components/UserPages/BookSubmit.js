@@ -82,7 +82,7 @@ const BookSubmit = () => {
         }
     }
     return (
-        <div className='mt-[-100px] h-screen flex flex-col items-center justify-center text-black '>
+        <div className='mt-[-100px] h-screen flex flex-col items-center sm:justify-center pt-40 sm:pt-0 text-black '>
             <p className='bg-red-600 font-semibold text-red-200'>{errMsg}</p>
             <form className='bg-white p-4 shadow-xl flex flex-col border border-1 rounded-2xl' onSubmit={handleSubmit}>
                 <h1 className='text-3xl text-center my-4'>Booking Details</h1>
@@ -108,10 +108,10 @@ const BookSubmit = () => {
                         id='event-description'
                         value={eventDescription}
                         onChange={(e) => setEventDescription(e.target.value)}
-                        maxLength={20}
+                        maxLength={25}
                         required
                     />
-                    <p className='text-red-600'>Characters remaining: {20 - eventDescription.length}</p>
+                    <p className='text-red-600'>Characters remaining: {25 - eventDescription.length}</p>
                 </div>
                 <div className='flex justify-center my-3'>
                     <button className={`bg-[#eb4d5f] text-white hover:font-semibold border-4 border-white p-3 rounded-xl ${!loading ? 'hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]' : ''}`} disabled={loading}>

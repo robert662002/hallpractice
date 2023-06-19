@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import backendapi from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 const Cancelbook = () => {
   const [bookingId, setBookingId] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const navigate = useNavigate();
+  const axiosPrivate=useAxiosPrivate();
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await backendapi.delete('/bookings', { data: { id: bookingId } });
+      await axiosPrivate.delete('/bookings', { data: { id: bookingId } });
       navigate('/userHome')
     }
     catch (err) {
@@ -29,11 +30,11 @@ const Cancelbook = () => {
 
   return (
     <>
-      <div className='flex justify-center items-center h-screen'>
-        <form className='max-w-[400px] w-full mx-auto mt-[-6rem] p-4  bg-white shadow-xl border-8 border-[#eb4d5f] rounded-2xl text-black' onSubmit={handleSubmit}>
+      <div className='flex justify-center md:mt-[-6rem] sm:items-center sm:h-screen pt-20 sm:pt-0'>
+        <form className=' sm:w-[400px] w-[350px] mx-auto   bg-white shadow-xl border-8 border-[#eb4d5f] rounded-2xl text-black' onSubmit={handleSubmit}>
           <p>{errMsg}</p>
           <h2 className='text-4xl font-bold text-center py-6'>Cancel Booking :(</h2>
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-2 px-2'>
             <label>Booking id</label>
             <input
               type='text'

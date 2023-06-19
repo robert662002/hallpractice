@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import backend from '../../api/axios';
 import { BarLoader } from 'react-spinners';
 import useAuth from '../../hooks/useAuth';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
-
 
 const UserBookings = () => {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [errMsg, setErrMsg] = useState('');
-    
-  const axiosPrivate = useAxiosPrivate();
 
-
+    const axiosPrivate = useAxiosPrivate();
 
     const { auth } = useAuth();
 
@@ -56,7 +52,7 @@ const UserBookings = () => {
                         <div className='flex justify-center'>
                             <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border p-4'>
                                 {bookings.map(booking => (
-                                    <div key={booking.id} className="flex flex-col items-center bg-gray-200 border-4 border-[#eb4d5f] shadow-xl rounded-2xl hover:scale-105">
+                                    <div key={booking.id} className="flex flex-col items-center bg-gray-200 border-4 px-4 border-[#eb4d5f] shadow-xl rounded-2xl hover:scale-105">
                                         <h1 className="px-2 text-3xl font-bold text-center my-2">{booking.description}</h1>
                                         <h1 className="my-1 text-xl">{booking.hallname}</h1>
                                         <h1 className="my-1 text-xl">{booking.date}</h1>
