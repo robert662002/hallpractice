@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useRefreshToken from '../../hooks/useRefreshToken';
 import useAuth from '../../hooks/useAuth';
-
+import { BarLoader } from "react-spinners";
 const PersistLogin = () => {
     const [isLoading, setIsLoading] = useState(true);
     const refresh = useRefreshToken();
@@ -39,7 +39,9 @@ const PersistLogin = () => {
     return (
         <>
             {isLoading
-                ? <p>Loading...</p>
+                ? <div className="mt-[-6rem] h-screen flex justify-center items-center">
+                    <BarLoader/>
+                </div>
                 : <Outlet />
             }
         </>
