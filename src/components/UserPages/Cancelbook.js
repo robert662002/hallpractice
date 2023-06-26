@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import { BarLoader } from 'react-spinners'
+
 const Cancelbook = () => {
   const [bookingId, setBookingId] = useState('');
   const [loading, setLoading] = useState(false);
