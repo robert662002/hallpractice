@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 const Cancelbook = () => {
   const [bookingId, setBookingId] = useState('');
+  const [loading, setLoading] = useState(false);
   const [errMsg, setErrMsg] = useState('');
   const navigate = useNavigate();
-  const axiosPrivate=useAxiosPrivate();
+  const axiosPrivate = useAxiosPrivate();
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
+      setLoading(true)
       await axiosPrivate.delete('/bookings', { data: { id: bookingId } });
       navigate('/userHome')
     }
@@ -22,6 +24,9 @@ const Cancelbook = () => {
       } else {
         setErrMsg('CancelFailed');
       }
+    }
+    finally {
+      setLoading(false)
     }
   }
   useEffect(() => {
@@ -47,9 +52,13 @@ const Cancelbook = () => {
             />
           </div>
           <div className='flex flex-col items-center justify-center'>
-            <button className='text-white border-4 border-white  my-5 p-3 px-6 rounded-xl bg-[#eb4d5f] hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]'>Cancel</button></div>
-          <div className='text-center'>
-            <p>Book another hall</p>
+            <button className={`bg-[#eb4d5f] text-white hover:font-semibold border-4 p-3 rounded-xl ${!loading ? 'hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]' : ''}`} disabled={loading}>
+              {loading ? (
+                <BarLoader color='#fff' height={4} width={100} />
+              ) : (
+                "Cancel"
+              )}
+            </button>
           </div>
         </form>
       </div>
