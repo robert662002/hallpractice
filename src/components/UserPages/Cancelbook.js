@@ -38,7 +38,7 @@ const Cancelbook = () => {
   return (
     <>
       <div className='flex justify-center md:mt-[-6rem] sm:items-center sm:h-screen pt-20 sm:pt-0'>
-        <form className=' sm:w-[400px] w-[350px] mx-auto   bg-white shadow-xl border-8 border-[#eb4d5f] rounded-2xl text-black' onSubmit={handleSubmit}>
+        <form className=' sm:w-[400px] w-[350px] mx-auto   bg-slate-200 shadow-xl border-8 border-[#eb4d5f] rounded-2xl text-black' onSubmit={handleSubmit}>
           <p>{errMsg}</p>
           <h2 className='text-4xl font-bold text-center py-6'>Cancel Booking :(</h2>
           <div className='flex flex-col gap-2 px-2'>
@@ -53,7 +53,7 @@ const Cancelbook = () => {
               maxLength={24}
             />
           </div>
-          <div className='flex flex-col items-center justify-center'>
+          <div className='flex flex-col items-center justify-center my-3'>
             <button className={`bg-[#eb4d5f] text-white hover:font-semibold border-4 p-3 rounded-xl ${!loading ? 'hover:bg-white hover:text-[#eb4d5f] hover:border-[#eb4d5f]' : ''}`} disabled={loading}>
               {loading ? (
                 <BarLoader color='#fff' height={4} width={100} />
